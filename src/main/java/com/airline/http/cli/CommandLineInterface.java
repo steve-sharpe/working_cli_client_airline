@@ -16,6 +16,10 @@ public class CommandLineInterface {
         this.restClient = new RESTClient(baseUrl);
     }
 
+    public CommandLineInterface(RESTClient restClient) {
+        this.restClient = restClient;
+    }
+
     public void run() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to the Flight Management CLI!");
@@ -165,7 +169,14 @@ public class CommandLineInterface {
         paginate();
     }
 
+    private boolean testMode = false;
+
+    public void setTestMode(boolean testMode) {
+        this.testMode = testMode;
+    }
+
     private void paginate() {
+        if (testMode) return;  // Skip pagination in test mode
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nPress Enter to continue...");
         scanner.nextLine();
